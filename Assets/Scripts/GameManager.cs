@@ -10,7 +10,8 @@ using Unity.Multiplayer.PlayMode;
 public class PlayerData
 {
     internal string Name;
-    internal int Position;
+    internal Transform Position;
+    internal GameObject PlayerPiece;
 }
 
 public class GameManager : MonoBehaviour
@@ -22,10 +23,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_InputField InputUI;
     [SerializeField] UIManager UI;
 
+    [SerializeField] List<GameObject> AllPlayerPieces;
+    [SerializeField] BoardPositions GetBoardPositions;
 
     internal PlayerController currentPlayer;
     private int currentPlayerIndex;
     private List<PlayerData> players = new List<PlayerData>();
+    private int currentAvailablePiece = 0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,20 +41,30 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     public void AssignPlayers()
     {
         if (string.IsNullOrEmpty(InputUI.text))
         {
-            StartTurn();
-            GameAssignmentPanel.SetActive(false);
+            //If players is not between 2-6, stop game
+            if (players.Count < 2 || players.Count > 6)
+            {
+                EndGame();
+            }
+            else
+            {
+                StartTurn();
+                GameAssignmentPanel.SetActive(false);
+            }
         }
         else
         {
             Debug.Log(InputUI.text);
-            players.Add(new PlayerData { Name = InputUI.text, Position = 0 });
+            players.Add(new PlayerData { Name = InputUI.text, Position = GetBoardPositions.AllPositions[0], PlayerPiece = AllPlayerPieces[currentAvailablePiece] });
             InputUI.text = "";
+            currentAvailablePiece++;
             Debug.Log($"Added player. Total players: {players.Count}");
         }
     }

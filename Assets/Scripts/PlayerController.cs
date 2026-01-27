@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         //Find our current board position and update it
         if (GetBoardPositions)
         {
-            int currentPosIndex = position ? GetBoardPositions.AllPositions.IndexOf(position) : 0;
+            int currentPosIndex = GetBoardPositions.AllPositions.IndexOf(position);
             currentPosIndex += RollDie();
 
             //If we are at or past the final index, set win. Prevents index out of range

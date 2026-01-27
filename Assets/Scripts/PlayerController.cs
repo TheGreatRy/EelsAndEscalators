@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(RollDieAnimation(result));
         Debug.Log(result);
         hasRolled = true;
-        
+
         return result; 
     }
 
@@ -70,18 +70,21 @@ public class PlayerController : MonoBehaviour
     public void Move()
     {
         //Find our current board position and update it
-        int currentPosIndex = GetBoardPositions.AllPositions.IndexOf(position);
-        currentPosIndex += RollDie();
+        if (GetBoardPositions)
+        {
+            int currentPosIndex = position ? GetBoardPositions.AllPositions.IndexOf(position) : 0;
+            currentPosIndex += RollDie();
 
-        //If we are at or past the final index, set win. Prevents index out of range
-        if (currentPosIndex >= GetBoardPositions.AllPositions.Count)
-        {
-            hasWon = true;
-        }
-        //Else, we are still playing and have a space we can move too
-        else
-        {
-            position = GetBoardPositions.AllPositions[currentPosIndex];
+            //If we are at or past the final index, set win. Prevents index out of range
+            if (currentPosIndex >= GetBoardPositions.AllPositions.Count)
+            {
+                hasWon = true;
+            }
+            //Else, we are still playing and have a space we can move too
+            else
+            {
+                position = GetBoardPositions.AllPositions[currentPosIndex];
+            }
         }
 
     }

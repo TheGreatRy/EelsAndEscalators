@@ -6753,7 +6753,6 @@ GameObject:
   - component: {fileID: 2002840823}
   - component: {fileID: 2002840822}
   - component: {fileID: 2002840821}
-  - component: {fileID: 2002840824}
   m_Layer: 5
   m_Name: RollText
   m_TagString: Untagged
@@ -6824,7 +6823,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2002840824}
+      - m_Target: {fileID: 847882143}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 1
@@ -6936,27 +6935,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002840819}
   m_CullTransparentMesh: 1
---- !u!114 &2002840824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002840819}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382ca1003215d254cbcce874b02b8704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  DieFaces:
-  - {fileID: 2800000, guid: 75403623fb1d9e74f8efb8bd269f2e4c, type: 3}
-  - {fileID: 2800000, guid: 1e467d667d1cccc478ca302eed9b32fb, type: 3}
-  - {fileID: 2800000, guid: 1f72e655ecad2db4ea94b3cab63805bd, type: 3}
-  - {fileID: 2800000, guid: f69afd2465fefbc4e8a070afb0659367, type: 3}
-  - {fileID: 2800000, guid: 39e64ad8d6c10fc448431ff7d22fd7ee, type: 3}
-  - {fileID: 2800000, guid: ce24964045c856546a585a44914f9892, type: 3}
-  DieFace: {fileID: 1332648099}
-  GetBoardPositions: {fileID: 0}
 --- !u!1 &2085913303
 GameObject:
   m_ObjectHideFlags: 0

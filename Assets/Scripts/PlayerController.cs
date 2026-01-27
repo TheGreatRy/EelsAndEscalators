@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] List<Texture2D> DieFaces;
     [SerializeField] RawImage DieFace;
     [SerializeField] BoardPositions GetBoardPositions;
+    [SerializeField] List<GameObject> AllPlayerPieces;
 
     public PlayerController(string ID)
     {
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     internal string PlayerId = string.Empty;
     internal Transform position;
+    internal GameObject playerPiece;
     internal int playerNumber = 1;
     internal bool hasRolled = false;
     internal bool hasWon = false;
@@ -27,9 +30,17 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        position = GetBoardPositions.AllPositions[0];
+        Invoke("setPos", 1);
     }
     // Update is called once per frame
+
+    private void setPos()
+    {
+        position = GetBoardPositions.AllPositions[0];
+        playerPiece = AllPlayerPieces[0];
+        Instantiate(playerPiece, position);
+
+    }
     void Update()
     {
 
@@ -83,6 +94,7 @@ public class PlayerController : MonoBehaviour
             //Else, we are still playing and have a space we can move too
             else
             {
+
                 position = GetBoardPositions.AllPositions[currentPosIndex];
             }
         }

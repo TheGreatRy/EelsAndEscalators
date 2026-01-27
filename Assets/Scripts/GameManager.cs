@@ -23,25 +23,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_InputField InputUI;
     [SerializeField] UIManager UI;
 
-    [SerializeField] List<GameObject> AllPlayerPieces;
-    [SerializeField] BoardPositions GetBoardPositions;
-
     internal PlayerController currentPlayer;
     private int currentPlayerIndex;
     private List<PlayerData> players = new List<PlayerData>();
-    private int currentAvailablePiece = 0;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void AssignPlayers()
@@ -62,9 +56,8 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log(InputUI.text);
-            players.Add(new PlayerData { Name = InputUI.text, Position = GetBoardPositions.AllPositions[0], PlayerPiece = AllPlayerPieces[currentAvailablePiece] });
+            players.Add(new PlayerData { Name = InputUI.text});
             InputUI.text = "";
-            currentAvailablePiece++;
             Debug.Log($"Added player. Total players: {players.Count}");
         }
     }
@@ -76,6 +69,7 @@ public class GameManager : MonoBehaviour
         PlayerData current = players[currentPlayerIndex];
         currentPlayer.PlayerId = current.Name;
         currentPlayer.position = current.Position;
+        currentPlayer.playerPiece = current.PlayerPiece;
         PlayerUIPanel.SetActive(true);
         UI.ShowTurn(currentPlayer);
 

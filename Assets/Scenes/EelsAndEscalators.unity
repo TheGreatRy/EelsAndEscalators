@@ -1509,14 +1509,6 @@ MonoBehaviour:
   Player: {fileID: 847882142}
   InputUI: {fileID: 1926059073}
   UI: {fileID: 527441226}
-  AllPlayerPieces:
-  - {fileID: 919132149155446097, guid: 3522f3b6302fbc44ead2ecf65149442a, type: 3}
-  - {fileID: 919132149155446097, guid: c483adfa59be0e448bfec1adc0789dc0, type: 3}
-  - {fileID: 919132149155446097, guid: a9a4a0d810e9fc1409b37d662944a994, type: 3}
-  - {fileID: 919132149155446097, guid: 41062cd1915c23b44917d045ba3f81ac, type: 3}
-  - {fileID: 919132149155446097, guid: 4afbcf260f3d27b4bb44e34a897b5c1c, type: 3}
-  - {fileID: 919132149155446097, guid: 81bb651cd58e26543bd6377f3926a244, type: 3}
-  GetBoardPositions: {fileID: 1238691382}
 --- !u!4 &746644195
 Transform:
   m_ObjectHideFlags: 0
@@ -1909,6 +1901,13 @@ MonoBehaviour:
   - {fileID: 2800000, guid: ce24964045c856546a585a44914f9892, type: 3}
   DieFace: {fileID: 1332648099}
   GetBoardPositions: {fileID: 1238691382}
+  AllPlayerPieces:
+  - {fileID: 919132149155446097, guid: 3522f3b6302fbc44ead2ecf65149442a, type: 3}
+  - {fileID: 919132149155446097, guid: c483adfa59be0e448bfec1adc0789dc0, type: 3}
+  - {fileID: 919132149155446097, guid: a9a4a0d810e9fc1409b37d662944a994, type: 3}
+  - {fileID: 919132149155446097, guid: 41062cd1915c23b44917d045ba3f81ac, type: 3}
+  - {fileID: 919132149155446097, guid: 4afbcf260f3d27b4bb44e34a897b5c1c, type: 3}
+  - {fileID: 919132149155446097, guid: 81bb651cd58e26543bd6377f3926a244, type: 3}
 --- !u!65 &847882144
 BoxCollider:
   m_ObjectHideFlags: 0

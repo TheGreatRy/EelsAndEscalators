@@ -17,7 +17,6 @@ public class AudioCycle : MonoBehaviour
     void Start()
     {
         StartCoroutine(AudioPlay());
-
     }
 
     // Update is called once per frame
@@ -40,5 +39,6 @@ public class AudioCycle : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = Audio[Random.Range(0, Audio.Count)];
         audioSource.Play();
+        
     }
 }

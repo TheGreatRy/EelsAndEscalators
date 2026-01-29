@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
-using TMPro;
 using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] List<Texture2D> DieFaces;
     [SerializeField] RawImage DieFace;
     [SerializeField] BoardPositions GetBoardPositions;
-    [SerializeField] List<GameObject> AllPlayerPieces;
+    [SerializeField] List<PlayerPiece> AllPlayerPieces;
 
     public PlayerController(string ID)
     {
@@ -21,8 +20,8 @@ public class PlayerController : MonoBehaviour
 
 
     internal string PlayerId = string.Empty;
-    internal Transform position;
-    internal GameObject playerPiece;
+    internal Transform playerTransform;
+    internal PlayerPiece playerPiece;
     internal int playerNumber = 1;
     internal bool hasRolled = false;
     internal bool hasWon = false;
@@ -30,22 +29,22 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Invoke("setPos", 1);
+        Invoke("Init", 0.1f);
     }
     // Update is called once per frame
 
-    private void setPos()
+    private void Init()
     {
-        position = GetBoardPositions.AllPositions[0];
-        playerPiece = AllPlayerPieces[0];
-        Instantiate(playerPiece, position);
 
+        playerTransform = GetBoardPositions.AllPositions[0];
+        playerPiece = AllPlayerPieces[0];
+        Instantiate(playerPiece, playerTransform);
     }
     void Update()
     {
-
+        
     }
-
+    
     public int RollDie()
     {
         int result = UnityEngine.Random.Range(1, DieFaces.Count + 1);
@@ -83,7 +82,7 @@ public class PlayerController : MonoBehaviour
         //Find our current board position and update it
         if (GetBoardPositions)
         {
-            int currentPosIndex = GetBoardPositions.AllPositions.IndexOf(position);
+            int currentPosIndex = GetBoardPositions.AllPositions.IndexOf(playerTransform);
             currentPosIndex += RollDie();
 
             //If we are at or past the final index, set win. Prevents index out of range
@@ -94,13 +93,37 @@ public class PlayerController : MonoBehaviour
             //Else, we are still playing and have a space we can move too
             else
             {
+                playerTransform = GetBoardPositions.AllPositions[currentPosIndex];
+                playerPiece = AllPlayerPieces[playerNumber - 1];
+                playerPiece.transform.position = playerTransform.position;
 
-                position = GetBoardPositions.AllPositions[currentPosIndex];
+                Invoke("CheckTile(currentPosIndex)", 2);
+
+                playerTransform = GetBoardPositions.AllPositions[currentPosIndex];
+                playerPiece = AllPlayerPieces[playerNumber - 1];
+                playerPiece.transform.position = playerTransform.position;
             }
         }
-
     }
+    private void CheckTile(int index)
+    {
+        foreach (var coords in GetBoardPositions.TileCoordinates)
+        {
+            string tileType = "";
+            if (index == coords.Key)
+            {
+                switch (tileType)
+                {
+                    case "ES_Base":
+                        index = 15;
+                        break;
+                    case "EL_Tail":
+                        index = 2;
+                        break;
+                }
 
-   
 
+            }
+        }
+    }
 }

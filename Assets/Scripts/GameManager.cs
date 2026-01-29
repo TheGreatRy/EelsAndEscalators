@@ -10,8 +10,9 @@ using Unity.Multiplayer.PlayMode;
 public class PlayerData
 {
     internal string Name;
+    internal int Number;
     internal Transform Position;
-    internal GameObject PlayerPiece;
+    internal PlayerPiece PlayerPiece;
 }
 
 public class GameManager : MonoBehaviour
@@ -36,6 +37,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentPlayer && currentPlayer.hasRolled)
+        {
+            currentPlayer.hasRolled = false;
+            currentPlayerIndex++;
+            if (currentPlayerIndex >= players.Count) currentPlayerIndex = 0;
+            StartTurn();
+        }
     }
 
     public void AssignPlayers()
@@ -56,7 +64,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log(InputUI.text);
-            players.Add(new PlayerData { Name = InputUI.text});
+            players.Add(new PlayerData { Name = InputUI.text, Number = players.Count + 1});
             InputUI.text = "";
             Debug.Log($"Added player. Total players: {players.Count}");
         }
@@ -68,8 +76,9 @@ public class GameManager : MonoBehaviour
         currentPlayer = Player.GetComponent<PlayerController>();
         PlayerData current = players[currentPlayerIndex];
         currentPlayer.PlayerId = current.Name;
-        currentPlayer.position = current.Position;
+        currentPlayer.playerTransform = current.Position;
         currentPlayer.playerPiece = current.PlayerPiece;
+        currentPlayer.playerNumber = current.Number;
         PlayerUIPanel.SetActive(true);
         UI.ShowTurn(currentPlayer);
 

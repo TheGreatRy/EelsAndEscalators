@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
         int index = player.playerNumber - 1; // Convert to 0-based index
         if (index >= 0 && index < playerTexts.Length && playerTexts[index] != null)
         {
-            playerTexts[index].text = player.PlayerId + ": " + player.position;
+            playerTexts[index].text = player.PlayerId + ": " + player.playerTransform;
             playerTexts[index].color = activeColor;
         }
 

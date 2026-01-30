@@ -93,37 +93,39 @@ public class PlayerController : MonoBehaviour
             //Else, we are still playing and have a space we can move too
             else
             {
+                Invoke("Timer", 5);
                 playerTransform = GetBoardPositions.AllPositions[currentPosIndex];
                 playerPiece = AllPlayerPieces[playerNumber - 1];
                 playerPiece.transform.position = playerTransform.position;
 
-                Invoke("CheckTile(currentPosIndex)", 2);
+                foreach (var coords in GetBoardPositions.TileCoordinates)
+                {
+                    string tileType = "";
+                    if (currentPosIndex == coords.Key)
+                    {
+                        switch (tileType)
+                        {
+                            case "ES_Base":
+                                currentPosIndex = 15;
+                                break;
+                            case "EL_Tail":
+                                currentPosIndex = 2;
+                                break;
+                        }
 
+
+                    }
+                }
+
+                Invoke("Timer", 2);
                 playerTransform = GetBoardPositions.AllPositions[currentPosIndex];
                 playerPiece = AllPlayerPieces[playerNumber - 1];
                 playerPiece.transform.position = playerTransform.position;
             }
         }
     }
-    private void CheckTile(int index)
+    private void Timer()
     {
-        foreach (var coords in GetBoardPositions.TileCoordinates)
-        {
-            string tileType = "";
-            if (index == coords.Key)
-            {
-                switch (tileType)
-                {
-                    case "ES_Base":
-                        index = 15;
-                        break;
-                    case "EL_Tail":
-                        index = 2;
-                        break;
-                }
-
-
-            }
-        }
+        Debug.Log("Waiting....");
     }
 }
